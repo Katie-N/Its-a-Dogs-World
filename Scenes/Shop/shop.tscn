@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bf2i7qsh6ai88"]
+
+[ext_resource type="Texture2D" uid="uid://bbni7w7yrxpvj" path="res://Art/Backgrounds/Background Mockup.png" id="1_78vcx"]
+[ext_resource type="PackedScene" uid="uid://chb2ksgqf6a6r" path="res://Scenes/dogCharacter.tscn" id="2_dqdqq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqdqq"]
+size = Vector2(635, 299.57428)
+
+[node name="Node2D" type="Node2D" unique_id=11903330]
+
+[node name="BackgroundMockup" type="Sprite2D" parent="." unique_id=1847400979]
+texture_filter = 1
+position = Vector2(399.33334, 299)
+scale = Vector2(4.0133333, 4.0133333)
+texture = ExtResource("1_78vcx")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=932934400]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=433553806]
+position = Vector2(315.4293, 129.41754)
+rotation = -0.033934284
+shape = SubResource("RectangleShape2D_dqdqq")
+
+[node name="DogCharacter" parent="." unique_id=1917843070 instance=ExtResource("2_dqdqq")]
+position = Vector2(223, 222.99997)
+scale = Vector2(0.73647463, 0.73647463)
