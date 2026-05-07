@@ -2,9 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://chb2ksgqf6a6r" path="res://Scenes/dogCharacter.tscn" id="1_bae7o"]
 [ext_resource type="Script" uid="uid://bwsit1rqq73il" path="res://Scenes/Shop/try_on.gd" id="1_giymh"]
-[ext_resource type="Texture2D" uid="uid://77ckvastgmxk" path="res://Art/Characters/DogHeadSpritesheet.png" id="2_odmx6"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_giymh"]
+[ext_resource type="Texture2D" uid="uid://cxbt3x505jy1d" path="res://Art/Characters/corgiHead.png" id="3_3kunc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjnc6"]
 content_margin_left = 4.0
@@ -32,58 +30,72 @@ color = Color(0.87058824, 0.7137255, 0.4745098, 1)
 [node name="DogCharacter" parent="CanvasLayer" unique_id=1294001680 instance=ExtResource("1_bae7o")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(174, 263)
+position = Vector2(202, 304)
+scale = Vector2(1.3502855, 1.3502855)
 max_speed = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=1659468360]
-offset_right = 230.0
-offset_bottom = 40.0
+[node name="Model Selection" type="HBoxContainer" parent="CanvasLayer" unique_id=1659468360]
+offset_left = 419.0
+offset_top = 41.0
+offset_right = 700.0
+offset_bottom = 146.0
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/HBoxContainer" unique_id=1569708498]
+[node name="TemplateDog" type="TextureButton" parent="CanvasLayer/Model Selection" unique_id=1569708498]
+texture_filter = 1
 layout_mode = 2
-texture_normal = SubResource("CompressedTexture2D_giymh")
+size_flags_horizontal = 3
+texture_normal = ExtResource("3_3kunc")
+stretch_mode = 5
 
-[node name="Corgi" type="Sprite2D" parent="CanvasLayer/HBoxContainer/TextureButton" unique_id=1157187109]
-texture = ExtResource("2_odmx6")
-hframes = 3
+[node name="Article Of Clothing Selection" type="HBoxContainer" parent="CanvasLayer" unique_id=1580991965]
+offset_left = 395.0
+offset_top = 143.0
+offset_right = 746.0
+offset_bottom = 248.0
+size_flags_horizontal = 3
+alignment = 1
 
-[node name="TextureButton2" type="TextureButton" parent="CanvasLayer/HBoxContainer" unique_id=1527269654]
-layout_mode = 2
-
-[node name="Lab" type="Sprite2D" parent="CanvasLayer/HBoxContainer/TextureButton2" unique_id=1282340304]
-position = Vector2(-4, 0)
-texture = ExtResource("2_odmx6")
-hframes = 3
-frame = 1
-
-[node name="TextureButton3" type="TextureButton" parent="CanvasLayer/HBoxContainer" unique_id=131366202]
-layout_mode = 2
-
-[node name="Pom" type="Sprite2D" parent="CanvasLayer/HBoxContainer/TextureButton3" unique_id=142421407]
-position = Vector2(-8, 0)
-texture = ExtResource("2_odmx6")
-hframes = 3
-frame = 2
-
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer" unique_id=25845893]
+[node name="Clothing Selection" type="GridContainer" parent="CanvasLayer" unique_id=613526713]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -386.0
-offset_top = -66.0
-offset_right = -59.883667
-offset_bottom = 63.0
+offset_left = -388.0
+offset_top = -100.0
+offset_right = -61.883667
+offset_bottom = 29.0
 grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(0.969, 1)
 size_flags_horizontal = 4
 columns = 7
 
-[node name="ColorButton" type="Button" parent="CanvasLayer/GridContainer" unique_id=1539771946]
+[node name="ColorButton" type="Button" parent="CanvasLayer/Clothing Selection" unique_id=881797896]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_mjnc6")
+
+[node name="Color Selection" type="GridContainer" parent="CanvasLayer" unique_id=25845893]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -385.0
+offset_top = 32.99997
+offset_right = -58.883667
+offset_bottom = 161.99997
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.969, 1)
+size_flags_horizontal = 4
+columns = 7
+
+[node name="ColorButton" type="Button" parent="CanvasLayer/Color Selection" unique_id=1539771946]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
