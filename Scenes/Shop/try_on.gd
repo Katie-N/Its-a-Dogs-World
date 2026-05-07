@@ -20,4 +20,6 @@ func instantiateColorButtons():
 
 func changeColor(color):
 	$CanvasLayer/DogCharacter.find_child("Shirt").frame = availableColors.find(color)
+	$CanvasLayer/DogCharacter.find_child("Pants").frame = 63 + availableColors.find(color)
+	$CanvasLayer/DogCharacter.find_child("Shoes").frame = 105 + availableColors.find(color)
 	
