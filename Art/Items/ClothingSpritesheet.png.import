@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blvxksypdovri"
-path="res://.godot/imported/PomFullBody.png-e758e7299d1b68d636a7699e52d9f357.ctex"
+uid="uid://ms3ljw5y60kr"
+path="res://.godot/imported/ClothingSpritesheet.png-92c0d912f274512d54135510bb2aae62.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Characters/PomFullBody.png"
-dest_files=["res://.godot/imported/PomFullBody.png-e758e7299d1b68d636a7699e52d9f357.ctex"]
+source_file="res://Art/Items/ClothingSpritesheet.png"
+dest_files=["res://.godot/imported/ClothingSpritesheet.png-92c0d912f274512d54135510bb2aae62.ctex"]
 
 [params]
 

@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://chb2ksgqf6a6r"]
 
-[ext_resource type="Texture2D" uid="uid://cycfsnirsiyxh" path="res://Art/Characters/LabFullBody.png" id="1_mie5b"]
 [ext_resource type="Script" uid="uid://crgi1dhxgyo53" path="res://Scenes/dog_character.gd" id="1_w7o8x"]
-[ext_resource type="Texture2D" uid="uid://blvxksypdovri" path="res://Art/Characters/PomFullBody.png" id="2_w7o8x"]
-[ext_resource type="Texture2D" uid="uid://dkb87c06lthbk" path="res://Art/Characters/CorgiFullBody.png" id="3_00prv"]
+[ext_resource type="Texture2D" uid="uid://coeuruojdj8km" path="res://Art/Characters/DogBodySpritesheet.png" id="2_w7o8x"]
+[ext_resource type="Texture2D" uid="uid://ms3ljw5y60kr" path="res://Art/Items/ClothingSpritesheet.png" id="3_00prv"]
+[ext_resource type="Texture2D" uid="uid://77ckvastgmxk" path="res://Art/Characters/DogHeadSpritesheet.png" id="4_up476"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w7o8x"]
-size = Vector2(133, 53)
+size = Vector2(133, 64.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00prv"]
 size = Vector2(196, 174)
@@ -14,28 +14,8 @@ size = Vector2(196, 174)
 [node name="DogCharacter" type="CharacterBody2D" unique_id=1294001680]
 script = ExtResource("1_w7o8x")
 
-[node name="LabFullBody" type="Sprite2D" parent="." unique_id=342579780]
-visible = false
-texture_filter = 1
-position = Vector2(0, -3)
-scale = Vector2(4.625, 4.625)
-texture = ExtResource("1_mie5b")
-
-[node name="Pom" type="Sprite2D" parent="." unique_id=821349645]
-visible = false
-texture_filter = 1
-position = Vector2(0, -3)
-scale = Vector2(4.625, 4.625)
-texture = ExtResource("2_w7o8x")
-
-[node name="Corgi" type="Sprite2D" parent="." unique_id=1704995064]
-texture_filter = 1
-position = Vector2(0, -3)
-scale = Vector2(4.625, 4.625)
-texture = ExtResource("3_00prv")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1951322269]
-position = Vector2(1, 118)
+position = Vector2(1, 123.75)
 shape = SubResource("RectangleShape2D_w7o8x")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1067015699]
@@ -46,3 +26,36 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1331554705]
 position = Vector2(1, 62)
 shape = SubResource("RectangleShape2D_00prv")
+
+[node name="Composite Sprites" type="Node2D" parent="." unique_id=543443205]
+scale = Vector2(4.657282, 4.657282)
+
+[node name="Body" type="Sprite2D" parent="Composite Sprites" unique_id=1749314693]
+texture_filter = 1
+texture = ExtResource("2_w7o8x")
+hframes = 3
+frame = 2
+
+[node name="Shirt" type="Sprite2D" parent="Composite Sprites" unique_id=1302232906]
+texture_filter = 1
+texture = ExtResource("3_00prv")
+hframes = 21
+vframes = 7
+
+[node name="Pants" type="Sprite2D" parent="Composite Sprites" unique_id=1117747945]
+texture = ExtResource("3_00prv")
+hframes = 21
+vframes = 7
+frame = 84
+
+[node name="Shoes" type="Sprite2D" parent="Composite Sprites" unique_id=1806399376]
+texture = ExtResource("3_00prv")
+hframes = 21
+vframes = 7
+frame = 105
+
+[node name="Head" type="Sprite2D" parent="Composite Sprites" unique_id=334983487]
+texture_filter = 1
+texture = ExtResource("4_up476")
+hframes = 3
+frame = 2

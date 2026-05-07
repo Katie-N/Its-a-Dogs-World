@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkb87c06lthbk"
-path="res://.godot/imported/CorgiFullBody.png-8eb29f32124e6cfa4b8ce0d960abe2ef.ctex"
+uid="uid://coeuruojdj8km"
+path="res://.godot/imported/DogBodySpritesheet.png-d4ab4dab9dc9fe357fe2c1a982e445a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Characters/CorgiFullBody.png"
-dest_files=["res://.godot/imported/CorgiFullBody.png-8eb29f32124e6cfa4b8ce0d960abe2ef.ctex"]
+source_file="res://Art/Characters/DogBodySpritesheet.png"
+dest_files=["res://.godot/imported/DogBodySpritesheet.png-d4ab4dab9dc9fe357fe2c1a982e445a1.ctex"]
 
 [params]
 
