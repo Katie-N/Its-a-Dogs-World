@@ -12,7 +12,7 @@ size = Vector2(827, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqdqq"]
 size = Vector2(635, 299.57428)
 
-[node name="Node2D" type="Node2D" unique_id=11903330]
+[node name="Shop" type="Node2D" unique_id=11903330]
 
 [node name="BackgroundMockup" type="Sprite2D" parent="." unique_id=1847400979]
 texture_filter = 1

@@ -34,7 +34,6 @@ scale = Vector2(4.657282, 4.657282)
 texture_filter = 1
 texture = ExtResource("2_w7o8x")
 hframes = 3
-frame = 2
 
 [node name="Shirt" type="Sprite2D" parent="Composite Sprites" unique_id=1302232906]
 texture_filter = 1
@@ -58,4 +57,3 @@ frame = 105
 texture_filter = 1
 texture = ExtResource("4_up476")
 hframes = 3
-frame = 2
