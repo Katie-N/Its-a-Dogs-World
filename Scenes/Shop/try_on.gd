@@ -1,14 +1,33 @@
 extends Node2D
 
-var availableColors = ["ffffff", "d11b00", "ff5d00", "ff9200", "ffcf00", "ffdf4f", "b3ff00", "d1ffae", "007e00", "005600", "5f8151", "bdffff", "00d9ff", "0091ff", "0047ff", "ffc0ff", "ff63ff", "771f6e", "544f54", "353135", "c8bec9"]
+# These are the dog breeds in the order they appear in the DogHeadSpritesheet.png/DogBodySpritesheet.png
 var dogTypes = ["corgi", "lab", "pom"]
+# If we want to grab the head texture from an AtlasTexture of DogHeadSpritesheet.png, we need to know how wide each sprite is. 
+# Currently we just have the heads exported as {dogType}Head.png but if we want it a little more robust we will use this method
+var dogWidth = 64
 
-@onready var modelSelectionTemplateButton = $"CanvasLayer/Model Selection/TemplateDog"
-@onready var colorTemplateButton = $"CanvasLayer/Color Selection/ColorButton"
+# Base clothing item options
+# These are the hex values the clothing is offered in. It should match the same order as the ClothingSpritesheet.png sprites because the index will be used to identify which color was selected. 
+var availableColors = ["ffffff", "d11b00", "ff5d00", "ff9200", "ffcf00", "ffdf4f", "b3ff00", "d1ffae", "007e00", "005600", "5f8151", "bdffff", "00d9ff", "0091ff", "0047ff", "ffc0ff", "ff63ff", "771f6e", "544f54", "353135", "c8bec9"]
+# Identify the row indices of each type of clothing that can only have one being worn at a time (you can wear a short sleeve shirt and boots at the same time but you can't wear pants at the same time as shorts).
+# By using lists of indices, we are free to append new clothing items as new rows in the spritesheet and then we just add the row index to the corresponding list. 
+# No need to keep shirts at the top, pants in the middle, and shoes at the bottom. 
+var shirtRows = [0,1,2]
+var pantsRows = [3,4]
+var shoeRows = [5,6]
+# Keep track of the width and height of each sprite so we can move our AtlasTexture region
+var clothingWidth = 64
+var clothingHeight = 75
+
+@onready var modelSelectionTemplateButton = $"CanvasLayer/CustomizationOptions/Model Selection/TemplateDog"
+@onready var colorTemplateButton = $"CanvasLayer/CustomizationOptions/Color Selection/ColorButton"
+@onready var clothingItemTemplateButton = $"CanvasLayer/CustomizationOptions/Clothing Selection/ClothingItemButton"
 
 func _ready():
 	instantiateDogModelButtons()
+	instantiateClothingButtons("shirt")
 	instantiateColorButtons()
+	
 	
 func instantiateDogModelButtons():
 	for dog in dogTypes:
@@ -16,35 +35,63 @@ func instantiateDogModelButtons():
 		var dogTexture = "res://Art/Characters/" + dog + "Head.png"
 		if ResourceLoader.exists(dogTexture):
 			dogModelButton.texture_normal = load(dogTexture)
-			modelSelectionTemplateButton.add_sibling(dogModelButton)
+			modelSelectionTemplateButton.get_parent().add_child(dogModelButton)
 			dogModelButton.name = dog
 			dogModelButton.pressed.connect(changeModel.bind(dog))
-		
 		else:
 			print("Error: " + dogTexture + " does not exist!")
 			
+#	Hide the template button
 	modelSelectionTemplateButton.visible = false
 
 func instantiateColorButtons():
-	
 	for color in availableColors:
 		var button = colorTemplateButton.duplicate()
 		var stylebox = button.get_theme_stylebox("normal").duplicate()
 		stylebox.bg_color = Color("#" + color)
 		button.add_theme_stylebox_override("normal", stylebox)
-		colorTemplateButton.add_sibling(button)
+		colorTemplateButton.get_parent().add_child(button)
 		button.name = color
 		button.pressed.connect(changeColor.bind(color))
 		
 #	Hide the template button now that we have finished adding buttons. 
 	colorTemplateButton.visible = false
 
+# When a color button is clicked
 func changeColor(color):
+#	Check which article of clothing (short sleeve shirt, paw boots, etc) is currently selected and change the color of that
 	$CanvasLayer/DogCharacter.find_child("Shirt").frame = availableColors.find(color)
 	$CanvasLayer/DogCharacter.find_child("Pants").frame = 63 + availableColors.find(color)
 	$CanvasLayer/DogCharacter.find_child("Shoes").frame = 105 + availableColors.find(color)
 	
+#	When a different dog is selected, change the model sprites
 func changeModel(dogType):
 	$CanvasLayer/DogCharacter.find_child("Head").frame = dogTypes.find(dogType)
 	$CanvasLayer/DogCharacter.find_child("Body").frame = dogTypes.find(dogType)
 	
+func instantiateClothingButtons(clothing):
+	var x = 0 # Since we want to just show the white clothing we will only use column 0 of the spritesheet (which is from x=0 to x=clothingWidth)
+	var y
+	var clothingItems
+	match clothing:
+		"shirt":
+			clothingItems = shirtRows
+		"pants":
+			clothingItems = pantsRows
+		"shoes":
+			clothingItems = shoeRows
+			
+	# Set the number of columns to be at most 5	
+	$"CanvasLayer/CustomizationOptions/Clothing Selection".columns = min(float(clothingItems.size()), 5.0)
+	
+	
+#	Loop through each type of article (as in, short sleeve, long sleeve, and tank top if clothing = shirt. Or pants and shorts if clothing = pants. Does not take color into consideration)
+	for clothingItem in clothingItems:
+		var clothingItemButton = clothingItemTemplateButton.duplicate(true)
+		y = clothingItem * clothingHeight # Row 0 will have y = 0. Row 1 will have y = clothingItemHeight, etc.
+		print(y)
+		clothingItemButton.texture_normal.region = Rect2(0, y, clothingWidth, clothingHeight)
+#		Godot has this weird thing where the textures will be shared if duplicating a node unless you explicitly duplicate that texture property. 
+#		So this line just says make a static copy of how the texture is right now and reassign the texture to be this copy. Then later changes will affect the original texture but since none of the buttons are actually using the original texture (they are all using static copies) it won't matter. 
+		clothingItemButton.texture_normal = clothingItemButton.texture_normal.duplicate()
+		clothingItemTemplateButton.get_parent().add_child(clothingItemButton)

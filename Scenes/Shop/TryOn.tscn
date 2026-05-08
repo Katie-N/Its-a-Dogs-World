@@ -3,6 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://chb2ksgqf6a6r" path="res://Scenes/dogCharacter.tscn" id="1_bae7o"]
 [ext_resource type="Script" uid="uid://bwsit1rqq73il" path="res://Scenes/Shop/try_on.gd" id="1_giymh"]
 [ext_resource type="Texture2D" uid="uid://cxbt3x505jy1d" path="res://Art/Characters/corgiHead.png" id="3_3kunc"]
+[ext_resource type="Texture2D" uid="uid://b8luw6g0qdpde" path="res://Art/Items/shirtButton.png" id="4_c4x2k"]
+[ext_resource type="Texture2D" uid="uid://bubu7io4x65xa" path="res://Art/Items/pantsButton.png" id="5_5bqxl"]
+[ext_resource type="Texture2D" uid="uid://bwx8bfnj8sx5k" path="res://Art/Items/shoeButton.png" id="6_a8vxu"]
+[ext_resource type="Texture2D" uid="uid://ms3ljw5y60kr" path="res://Art/Items/ClothingSpritesheet.png" id="7_5bqxl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8vxu"]
+atlas = ExtResource("7_5bqxl")
+region = Rect2(0, 0, 64, 75)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjnc6"]
 content_margin_left = 4.0
@@ -22,7 +30,7 @@ script = ExtResource("1_giymh")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1286480036]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1154844212]
+[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=1154844212]
 offset_right = 799.0
 offset_bottom = 603.0
 color = Color(0.87058824, 0.7137255, 0.4745098, 1)
@@ -34,68 +42,71 @@ position = Vector2(202, 304)
 scale = Vector2(1.3502855, 1.3502855)
 max_speed = 0
 
-[node name="Model Selection" type="HBoxContainer" parent="CanvasLayer" unique_id=1659468360]
-offset_left = 419.0
-offset_top = 41.0
-offset_right = 700.0
-offset_bottom = 146.0
+[node name="CustomizationOptions" type="VBoxContainer" parent="CanvasLayer" unique_id=274777222]
+anchors_preset = -1
+offset_left = 397.0
+offset_top = 29.0
+offset_right = 778.0
+offset_bottom = 571.0
+
+[node name="Model Selection" type="HBoxContainer" parent="CanvasLayer/CustomizationOptions" unique_id=1659468360]
+layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 alignment = 1
 
-[node name="TemplateDog" type="TextureButton" parent="CanvasLayer/Model Selection" unique_id=1569708498]
+[node name="TemplateDog" type="TextureButton" parent="CanvasLayer/CustomizationOptions/Model Selection" unique_id=1569708498]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = ExtResource("3_3kunc")
 stretch_mode = 5
 
-[node name="Article Of Clothing Selection" type="HBoxContainer" parent="CanvasLayer" unique_id=1580991965]
-offset_left = 395.0
-offset_top = 143.0
-offset_right = 746.0
-offset_bottom = 248.0
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="Clothing Selection" type="GridContainer" parent="CanvasLayer" unique_id=613526713]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -388.0
-offset_top = -100.0
-offset_right = -61.883667
-offset_bottom = 29.0
-grow_horizontal = 0
-grow_vertical = 2
-scale = Vector2(0.969, 1)
-size_flags_horizontal = 4
-columns = 7
-
-[node name="ColorButton" type="Button" parent="CanvasLayer/Clothing Selection" unique_id=881797896]
+[node name="Article Of Clothing Selection" type="HBoxContainer" parent="CanvasLayer/CustomizationOptions" unique_id=1580991965]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_mjnc6")
+alignment = 1
 
-[node name="Color Selection" type="GridContainer" parent="CanvasLayer" unique_id=25845893]
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -385.0
-offset_top = 32.99997
-offset_right = -58.883667
-offset_bottom = 161.99997
-grow_horizontal = 0
-grow_vertical = 2
-scale = Vector2(0.969, 1)
-size_flags_horizontal = 4
+[node name="ShirtButton" type="TextureButton" parent="CanvasLayer/CustomizationOptions/Article Of Clothing Selection" unique_id=89178554]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("4_c4x2k")
+stretch_mode = 5
+
+[node name="PantsButton" type="TextureButton" parent="CanvasLayer/CustomizationOptions/Article Of Clothing Selection" unique_id=1308436830]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("5_5bqxl")
+stretch_mode = 5
+
+[node name="ShoesButton" type="TextureButton" parent="CanvasLayer/CustomizationOptions/Article Of Clothing Selection" unique_id=921056684]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("6_a8vxu")
+stretch_mode = 5
+
+[node name="Clothing Selection" type="GridContainer" parent="CanvasLayer/CustomizationOptions" unique_id=613526713]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 5
+
+[node name="ClothingItemButton" type="TextureButton" parent="CanvasLayer/CustomizationOptions/Clothing Selection" unique_id=842353477]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = SubResource("AtlasTexture_a8vxu")
+stretch_mode = 5
+
+[node name="Color Selection" type="GridContainer" parent="CanvasLayer/CustomizationOptions" unique_id=25845893]
+layout_mode = 2
+size_flags_vertical = 3
 columns = 7
 
-[node name="ColorButton" type="Button" parent="CanvasLayer/Color Selection" unique_id=1539771946]
+[node name="ColorButton" type="Button" parent="CanvasLayer/CustomizationOptions/Color Selection" unique_id=1539771946]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
