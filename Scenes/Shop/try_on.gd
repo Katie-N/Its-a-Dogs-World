@@ -37,14 +37,27 @@ func _ready():
 # DOG MODEL SELECTION GRID CODE
 
 func instantiateDogModelButtons():
+	var dogModelButtonGroup = ButtonGroup.new()
+	
 	for dog in dogTypes:
 		var dogModelButton = modelSelectionTemplateButton.duplicate()
 		var dogTexture = "res://Art/Characters/" + dog + "Head.png"
 		if ResourceLoader.exists(dogTexture):
+#			This is the texture for the button, not the model itself. Right now, it just shows the head of the dog as an icon representing what the model will be if selected. 
 			dogModelButton.texture_normal = load(dogTexture)
+#			Add the button to the container. I tried using add_sibling instead of get_parent().add_child() but the former orders the children in the container backwards while the latter orders them in the order they are added which is what I want. 
 			modelSelectionTemplateButton.get_parent().add_child(dogModelButton)
+			
+#			Set the name of the button so it can be used to identify what dog was selected
 			dogModelButton.name = dog
-			dogModelButton.pressed.connect(changeModel.bind(dog))
+			
+#			Set the button group so exactly 1 of the dog breeds is toggled on at a time. 
+			dogModelButton.button_group = dogModelButtonGroup
+			dogModelButton.toggle_mode = true
+			
+			dogModelButton.toggled.connect(changeModel.bind(dog))
+#			It will automatically pass the toggled value as the first parameter even though we don't bind it.
+			dogModelButton.toggled.connect(toggleBackground.bind(dogModelButton))
 		else:
 			print("Error: " + dogTexture + " does not exist!")
 			
@@ -52,10 +65,13 @@ func instantiateDogModelButtons():
 	modelSelectionTemplateButton.visible = false
 
 #	When a different dog is selected, change the model sprites
-func changeModel(dogType):
-	$CanvasLayer/DogCharacter.find_child("Head").frame = dogTypes.find(dogType)
-	$CanvasLayer/DogCharacter.find_child("Body").frame = dogTypes.find(dogType)
+func changeModel(pressed, dogType):
+	if pressed:
+		$CanvasLayer/DogCharacter.find_child("Head").frame = dogTypes.find(dogType)
+		$CanvasLayer/DogCharacter.find_child("Body").frame = dogTypes.find(dogType)
 	
+func toggleBackground(pressed: bool, dogModelButton):
+	dogModelButton.get_node("ActiveBackgroundColor").visible = pressed
 	
 # COLOR SELECTION GRID CODE
 
@@ -157,9 +173,11 @@ func _on_shoes_button_toggled(pressed: bool) -> void:
 	# To make the button have an arrow when hovered over, chaange Mouse -> Default Cursor Shape = Arrow
 	# To make the texture scale set Textures -> Stretch Mode = Keep Aspect Centered and set Layout -> Container Sizing -> Horizontal (and Vertical) -> Fill and under it set Expand = True
 	# To make the button active after being pressed until it is pressed again, set toggle mode to true on the TextureButton
+	# To make only one button selected at a time, you have to make a buttonGroup tres for it and assign the same (not duplicated) tres file to each button. This makes it like a radio button.
 	
 # ColorRect SETTINGS
 	# Type of background when clicked: ColorRect
+	# Name it explicitly "ActiveBackgroundColor" for the code I've written to work.
 	# The background should be a child of the TextureButton it will be highlighting
 	# To order the button on top of the color rect: Either disable z as relative and set TextureRect z as 1 (and colorRect z as 0). OR, set visibility -> "Show Behind Parent" to true (I think this will work but not entirely sure).
 	# To hide the colorRect when the button is unpressed, make the colorRect visibility equal the emmitted toggle value (true when toggled on, false when toggled off)
