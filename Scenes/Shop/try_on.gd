@@ -29,7 +29,7 @@ func _ready():
 	for clothingType in clothingTypes:
 		instantiateClothingButtons(clothingType)
 #	Start with the shirts tab selected
-	clothingTypeSelected("shirts")
+	$"CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtButton".emit_signal("toggled", true)
 	instantiateColorButtons()
 	
 # DOG MODEL SELECTION GRID CODE
@@ -131,10 +131,35 @@ func clothingTypeSelected(clothing):
 		else:
 			child.visible = false
 			
+			
+func _on_shirt_button_toggled(pressed: bool) -> void:
+	# If its pressed then the background color rect will be visible (pressed = true so visible = true). Otherwise it will be hidden
+	$"CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtButton/ActiveBackgroundColor".visible = pressed	
+	if pressed:
+		clothingTypeSelected("shirts")
 
-func _on_shirt_button_pressed() -> void:
-	clothingTypeSelected("shirts")
-func _on_pants_button_pressed() -> void:
-	clothingTypeSelected("pants")	
-func _on_shoes_button_pressed() -> void:
+func _on_pants_button_toggled(pressed: bool) -> void:
+	# If its pressed then the background color rect will be visible (pressed = true so visible = true). Otherwise it will be hidden
+	$"CanvasLayer/CustomizationOptions/Article Of Clothing Selection/PantsButton/ActiveBackgroundColor".visible = pressed	
+	if pressed:
+		clothingTypeSelected("pants")	
+
+func _on_shoes_button_toggled(pressed: bool) -> void:
+	# If its pressed then the background color rect will be visible (pressed = true so visible = true). Otherwise it will be hidden
+	$"CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShoesButton/ActiveBackgroundColor".visible = pressed	
+	if pressed:
 		clothingTypeSelected("shoes")
+		
+# Notes regarding how to setup the buttons
+# TextureButton SETTINGS
+	# To make the button have an arrow when hovered over, chaange Mouse -> Default Cursor Shape = Arrow
+	# To make the texture scale set Textures -> Stretch Mode = Keep Aspect Centered and set Layout -> Container Sizing -> Horizontal (and Vertical) -> Fill and under it set Expand = True
+	# To make the button active after being pressed until it is pressed again, set toggle mode to true on the TextureButton
+	
+# ColorRect SETTINGS
+	# Type of background when clicked: ColorRect
+	# The background should be a child of the TextureButton it will be highlighting
+	# To order the button on top of the color rect: Either disable z as relative and set TextureRect z as 1 (and colorRect z as 0). OR, set visibility -> "Show Behind Parent" to true (I think this will work but not entirely sure).
+	# To hide the colorRect when the button is unpressed, make the colorRect visibility equal the emmitted toggle value (true when toggled on, false when toggled off)
+	# To prevent the colorRect from catching mouse clicks, set Mouse -> Filter = Ignore
+	# To make the ColorRect cover the TextureButton, set Layout -> Anchors Preset = Full Rect
