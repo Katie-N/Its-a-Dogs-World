@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://chb2ksgqf6a6r" path="res://Scenes/dogCharacter.tscn" id="1_bae7o"]
 [ext_resource type="Script" uid="uid://bwsit1rqq73il" path="res://Scenes/Shop/try_on.gd" id="1_giymh"]
 [ext_resource type="Texture2D" uid="uid://cxbt3x505jy1d" path="res://Art/Characters/corgiHead.png" id="3_3kunc"]
+[ext_resource type="ButtonGroup" uid="uid://xlr7r5o303dn" path="res://resources/articleOfClothingButtonGroup.tres" id="4_a8vxu"]
 [ext_resource type="Texture2D" uid="uid://b8luw6g0qdpde" path="res://Art/Items/shirtButton.png" id="4_c4x2k"]
 [ext_resource type="Texture2D" uid="uid://bubu7io4x65xa" path="res://Art/Items/pantsButton.png" id="5_5bqxl"]
 [ext_resource type="Texture2D" uid="uid://bwx8bfnj8sx5k" path="res://Art/Items/shoeButton.png" id="6_a8vxu"]
@@ -77,6 +78,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 toggle_mode = true
+button_group = ExtResource("4_a8vxu")
 texture_normal = ExtResource("4_c4x2k")
 stretch_mode = 5
 
@@ -100,6 +102,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 toggle_mode = true
+button_group = ExtResource("4_a8vxu")
 texture_normal = ExtResource("5_5bqxl")
 stretch_mode = 5
 
@@ -123,6 +126,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 toggle_mode = true
+button_group = ExtResource("4_a8vxu")
 texture_normal = ExtResource("6_a8vxu")
 stretch_mode = 5
 

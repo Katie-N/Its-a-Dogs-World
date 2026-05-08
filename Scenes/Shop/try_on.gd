@@ -30,6 +30,8 @@ func _ready():
 		instantiateClothingButtons(clothingType)
 #	Start with the shirts tab selected
 	$"CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtButton".emit_signal("toggled", true)
+	# I found it was necessary to set this as well in order for the buttonGroup to realize the shirts button is initially pressed and should be unselected if another button is toggled
+	$"CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtButton".set_pressed_no_signal(true) 
 	instantiateColorButtons()
 	
 # DOG MODEL SELECTION GRID CODE
