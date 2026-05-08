@@ -131,3 +131,10 @@ func clothingTypeSelected(clothing):
 		else:
 			child.visible = false
 			
+
+func _on_shirt_button_pressed() -> void:
+	clothingTypeSelected("shirts")
+func _on_pants_button_pressed() -> void:
+	clothingTypeSelected("pants")	
+func _on_shoes_button_pressed() -> void:
+		clothingTypeSelected("shoes")

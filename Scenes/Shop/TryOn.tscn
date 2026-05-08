@@ -111,3 +111,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_mjnc6")
+
+[connection signal="pressed" from="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtButton" to="." method="_on_shirt_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/PantsButton" to="." method="_on_pants_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShoesButton" to="." method="_on_shoes_button_pressed"]
