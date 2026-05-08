@@ -169,6 +169,19 @@ toggle_mode = true
 texture_normal = SubResource("AtlasTexture_a8vxu")
 stretch_mode = 5
 
+[node name="ActiveBackgroundColor" type="ColorRect" parent="CanvasLayer/CustomizationOptions/Clothing Selection/ClothingItemButton" unique_id=1188165461]
+visible = false
+show_behind_parent = true
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.69875956, 0.54557943, 0.30077294, 1)
+
 [node name="Color Selection" type="GridContainer" parent="CanvasLayer/CustomizationOptions" unique_id=25845893]
 layout_mode = 2
 size_flags_vertical = 3

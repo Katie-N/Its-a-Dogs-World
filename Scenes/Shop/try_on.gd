@@ -122,10 +122,13 @@ func instantiateClothingButtons(clothing):
 	
 	if clothingItems == null:
 		return
+		
+	var clothingButtonGroup = ButtonGroup.new()
 	
 #	Loop through each type of article (as in, short sleeve, long sleeve, and tank top if clothing = shirt. Or pants and shorts if clothing = pants. Does not take color into consideration)
 	for clothingItem in clothingItems:
 		var clothingItemButton = clothingItemTemplateButton.duplicate(true)
+#		Name the clothing button so it can later be filtered for when we only want to show shirt, or pants, or shoes, etc.
 		clothingItemButton.name = clothing + str(clothingItem)
 		
 #		Set the top pixel based on the current row and the height of the sprites.
@@ -136,6 +139,17 @@ func instantiateClothingButtons(clothing):
 #		Godot has this weird thing where the textures will be shared if duplicating a node unless you explicitly duplicate that texture property. (See https://forum.godotengine.org/t/how-to-make-resource-unique-from-script/26977)
 #		So this line just says make a static copy of how the texture is right now and reassign the texture to be this copy. Then later changes will affect the original texture but since none of the buttons are actually using the original texture (they are all using static copies) it won't matter. 
 		clothingItemButton.texture_normal = clothingItemButton.texture_normal.duplicate()
+		
+#		Set the button group so exactly 1 of the articles of clothing in that category is toggled on at a time. 
+		clothingItemButton.button_group = clothingButtonGroup
+		clothingItemButton.toggle_mode = true
+		
+		#clothingItemButton.toggled.connect(changeClothingItem.bind(clothingItem))
+#		It will automatically pass the toggled value as the first parameter even though we don't bind it.
+		clothingItemButton.toggled.connect(toggleBackground.bind(clothingItemButton))
+		
+		
+#		Add the button to the scene
 		clothingItemTemplateButton.get_parent().add_child(clothingItemButton)
 
 func clothingTypeSelected(clothing):
