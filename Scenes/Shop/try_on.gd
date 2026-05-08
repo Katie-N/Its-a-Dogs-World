@@ -144,10 +144,9 @@ func instantiateClothingButtons(clothing):
 		clothingItemButton.button_group = clothingButtonGroup
 		clothingItemButton.toggle_mode = true
 		
-		#clothingItemButton.toggled.connect(changeClothingItem.bind(clothingItem))
-#		It will automatically pass the toggled value as the first parameter even though we don't bind it.
+#		It will automatically pass the toggled value as the first parameter even though we don't bind it. So the functions need to account for that invisible first parameter.
+		clothingItemButton.toggled.connect(changeClothingItem.bind(clothing))
 		clothingItemButton.toggled.connect(toggleBackground.bind(clothingItemButton))
-		
 		
 #		Add the button to the scene
 		clothingItemTemplateButton.get_parent().add_child(clothingItemButton)
@@ -163,7 +162,39 @@ func clothingTypeSelected(clothing):
 		else:
 			child.visible = false
 			
+func changeClothingItem(pressed, clothingType):
+	if pressed:
+		print(clothingType)
+		var buttonInGroup = $"CanvasLayer/CustomizationOptions/Clothing Selection".find_child(clothingType + "*", false, false)
+		var spritesheetRowIndex = getClothingIndex(clothingType, buttonInGroup)
+		print(spritesheetRowIndex)
+		if spritesheetRowIndex == null:
+			return
 			
+		var spriteToChange
+		match clothingType:
+			"shirts":
+				spriteToChange = $"CanvasLayer/DogCharacter/Composite Sprites/Shirt"
+			"pants":
+				spriteToChange = $"CanvasLayer/DogCharacter/Composite Sprites/Pants"
+			"shoes":
+				spriteToChange = $"CanvasLayer/DogCharacter/Composite Sprites/Shoes"
+		if spriteToChange == null:
+			return
+			
+#		Multiply by the number of columns in the spritesheet in order to get the correct frame.
+		spriteToChange.frame = spritesheetRowIndex * spriteToChange.hframes
+		
+# This function takes the clothing type string ("shirts", "pants", or "shoes"), and an instance of a button in that group.
+# and returns the row of the spritesheet that has the selected clothing
+func getClothingIndex(clothingType, buttonInGroup):
+	var pressedButtonInGroup = buttonInGroup.button_group.get_pressed_button()
+	if pressedButtonInGroup == null:
+		return null
+	var number = pressedButtonInGroup.name.replace(clothingType, "")
+	var index = int(number)
+	return index
+	
 func _on_shirt_button_toggled(pressed: bool) -> void:
 	# If its pressed then the background color rect will be visible (pressed = true so visible = true). Otherwise it will be hidden
 	$"CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtButton/ActiveBackgroundColor".visible = pressed	
@@ -182,7 +213,7 @@ func _on_shoes_button_toggled(pressed: bool) -> void:
 	if pressed:
 		clothingTypeSelected("shoes")
 		
-# Notes regarding how to setup the buttons
+# Notes regarding how to setup the buttons (excluding the color selection buttons)
 # TextureButton SETTINGS
 	# To make the button have an arrow when hovered over, chaange Mouse -> Default Cursor Shape = Arrow
 	# To make the texture scale set Textures -> Stretch Mode = Keep Aspect Centered and set Layout -> Container Sizing -> Horizontal (and Vertical) -> Fill and under it set Expand = True

@@ -44,7 +44,6 @@ scale = Vector2(1.3502855, 1.3502855)
 max_speed = 0
 
 [node name="CustomizationOptions" type="VBoxContainer" parent="CanvasLayer" unique_id=274777222]
-anchors_preset = -1
 offset_left = 397.0
 offset_top = 29.0
 offset_right = 778.0
