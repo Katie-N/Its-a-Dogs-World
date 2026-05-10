@@ -82,7 +82,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="ShirtButton" type="TextureButton" parent="CanvasLayer/CustomizationOptions/Article Of Clothing Selection" unique_id=89178554]
+[node name="ShirtsButton" type="TextureButton" parent="CanvasLayer/CustomizationOptions/Article Of Clothing Selection" unique_id=89178554]
 z_index = 2
 texture_filter = 1
 layout_mode = 2
@@ -93,7 +93,7 @@ button_group = ExtResource("4_a8vxu")
 texture_normal = ExtResource("4_c4x2k")
 stretch_mode = 5
 
-[node name="ActiveBackgroundColor" type="ColorRect" parent="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtButton" unique_id=647241148]
+[node name="ActiveBackgroundColor" type="ColorRect" parent="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtsButton" unique_id=647241148]
 visible = false
 show_behind_parent = true
 z_as_relative = false
@@ -193,6 +193,6 @@ size_flags_vertical = 3
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_mjnc6")
 
-[connection signal="toggled" from="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtButton" to="." method="_on_shirt_button_toggled"]
+[connection signal="toggled" from="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtsButton" to="." method="_on_shirt_button_toggled"]
 [connection signal="toggled" from="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/PantsButton" to="." method="_on_pants_button_toggled"]
 [connection signal="toggled" from="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShoesButton" to="." method="_on_shoes_button_toggled"]

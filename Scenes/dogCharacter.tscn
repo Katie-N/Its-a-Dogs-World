@@ -35,7 +35,7 @@ texture_filter = 1
 texture = ExtResource("2_w7o8x")
 hframes = 3
 
-[node name="Shirt" type="Sprite2D" parent="Composite Sprites" unique_id=1302232906]
+[node name="Shirts" type="Sprite2D" parent="Composite Sprites" unique_id=1302232906]
 texture_filter = 1
 texture = ExtResource("3_00prv")
 hframes = 21

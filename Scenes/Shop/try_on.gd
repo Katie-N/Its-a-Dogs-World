@@ -29,9 +29,9 @@ func _ready():
 	for clothingType in clothingTypes:
 		instantiateClothingButtons(clothingType)
 #	Start with the shirts tab selected
-	$"CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtButton".emit_signal("toggled", true)
+	$"CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtsButton".emit_signal("toggled", true)
 	# I found it was necessary to set this as well in order for the buttonGroup to realize the shirts button is initially pressed and should be unselected if another button is toggled
-	$"CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtButton".set_pressed_no_signal(true) 
+	$"CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtsButton".set_pressed_no_signal(true) 
 	instantiateColorButtons()
 	
 # DOG MODEL SELECTION GRID CODE
@@ -91,9 +91,33 @@ func instantiateColorButtons():
 # When a color button is clicked
 func changeColor(color):
 #	Check which article of clothing (short sleeve shirt, paw boots, etc) is currently selected and change the color of that
-	$CanvasLayer/DogCharacter.find_child("Shirt").frame = availableColors.find(color)
-	$CanvasLayer/DogCharacter.find_child("Pants").frame = 63 + availableColors.find(color)
-	$CanvasLayer/DogCharacter.find_child("Shoes").frame = 105 + availableColors.find(color)
+	var clothingButton = $"CanvasLayer/CustomizationOptions/Article Of Clothing Selection".get_child(0)
+	if clothingButton == null:
+		return
+	
+	var selectedClothing = clothingButton.button_group.get_pressed_button()
+	
+	
+	for clothingType in clothingTypes:
+		if clothingType in selectedClothing.name.to_lower():
+			var wornClothing = $CanvasLayer/DogCharacter.find_child("*" + clothingType + "*") 
+			if wornClothing == null:
+				wornClothing = $CanvasLayer/DogCharacter.find_child("*" + clothingType.capitalize() + "*") 
+			if wornClothing == null:
+				return
+			
+#			If we didn't change the clothing item when it is first selected then we would need to find the row of the spritesheet based on the selected clothing. But because we already change the clothing type, we just need to change the color of whatever clothing is currently being worn. 
+			#var selectedFrame clothing = $"CanvasLayer/CustomizationOptions/Clothing Selection".find_child(clothingType).button_group.get_pressed_button()
+
+#			Basically (wornClothing.frame / wornClothing.vframes) does truncation when dividing two integers. 
+#			So it gets the row which is the clothing item that needs the color update. Then it multiplies by the number of columns to the beginning frame in that row. 
+#			Then we just add the color index in
+			print("Frame " + str(wornClothing.frame))
+			print("Vframes " + str(wornClothing.hframes))
+			print("Colors " + str(availableColors.find(color)))
+			wornClothing.frame = (wornClothing.frame / wornClothing.hframes) * wornClothing.hframes + availableColors.find(color)
+	#$CanvasLayer/DogCharacter.find_child("Pants").frame = 63 + availableColors.find(color)
+	#$CanvasLayer/DogCharacter.find_child("Shoes").frame = 105 + availableColors.find(color)
 	
 	
 # CLOTHING SELECTION GRID CODE
@@ -164,17 +188,15 @@ func clothingTypeSelected(clothing):
 			
 func changeClothingItem(pressed, clothingType):
 	if pressed:
-		print(clothingType)
 		var buttonInGroup = $"CanvasLayer/CustomizationOptions/Clothing Selection".find_child(clothingType + "*", false, false)
 		var spritesheetRowIndex = getClothingIndex(clothingType, buttonInGroup)
-		print(spritesheetRowIndex)
 		if spritesheetRowIndex == null:
 			return
 			
 		var spriteToChange
 		match clothingType:
 			"shirts":
-				spriteToChange = $"CanvasLayer/DogCharacter/Composite Sprites/Shirt"
+				spriteToChange = $"CanvasLayer/DogCharacter/Composite Sprites/Shirts"
 			"pants":
 				spriteToChange = $"CanvasLayer/DogCharacter/Composite Sprites/Pants"
 			"shoes":
@@ -197,7 +219,7 @@ func getClothingIndex(clothingType, buttonInGroup):
 	
 func _on_shirt_button_toggled(pressed: bool) -> void:
 	# If its pressed then the background color rect will be visible (pressed = true so visible = true). Otherwise it will be hidden
-	$"CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtButton/ActiveBackgroundColor".visible = pressed	
+	$"CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtsButton/ActiveBackgroundColor".visible = pressed	
 	if pressed:
 		clothingTypeSelected("shirts")
 
