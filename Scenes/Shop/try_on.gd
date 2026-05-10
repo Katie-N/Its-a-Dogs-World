@@ -112,13 +112,7 @@ func changeColor(color):
 #			Basically (wornClothing.frame / wornClothing.vframes) does truncation when dividing two integers. 
 #			So it gets the row which is the clothing item that needs the color update. Then it multiplies by the number of columns to the beginning frame in that row. 
 #			Then we just add the color index in
-			print("Frame " + str(wornClothing.frame))
-			print("Vframes " + str(wornClothing.hframes))
-			print("Colors " + str(availableColors.find(color)))
 			wornClothing.frame = (wornClothing.frame / wornClothing.hframes) * wornClothing.hframes + availableColors.find(color)
-	#$CanvasLayer/DogCharacter.find_child("Pants").frame = 63 + availableColors.find(color)
-	#$CanvasLayer/DogCharacter.find_child("Shoes").frame = 105 + availableColors.find(color)
-	
 	
 # CLOTHING SELECTION GRID CODE
 
