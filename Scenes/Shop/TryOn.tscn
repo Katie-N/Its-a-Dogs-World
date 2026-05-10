@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bubu7io4x65xa" path="res://Art/Items/pantsButton.png" id="5_5bqxl"]
 [ext_resource type="Texture2D" uid="uid://bwx8bfnj8sx5k" path="res://Art/Items/shoeButton.png" id="6_a8vxu"]
 [ext_resource type="Texture2D" uid="uid://ms3ljw5y60kr" path="res://Art/Items/ClothingSpritesheet.png" id="7_5bqxl"]
+[ext_resource type="Script" uid="uid://bkosvnfdrt2ah" path="res://Src/saver_loader.gd" id="9_kgg0x"]
+[ext_resource type="Texture2D" uid="uid://cpunbttpl0sy2" path="res://Art/Items/lock.png" id="9_qw47h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a8vxu"]
 atlas = ExtResource("7_5bqxl")
@@ -192,6 +194,22 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_mjnc6")
+
+[node name="LockButton" type="TextureButton" parent="CanvasLayer/CustomizationOptions/Color Selection/ColorButton" unique_id=1045986768]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("9_qw47h")
+stretch_mode = 5
+
+[node name="SaverLoader" type="Node" parent="." unique_id=1260225901 node_paths=PackedStringArray("store_inventory")]
+script = ExtResource("9_kgg0x")
+store_inventory = NodePath("..")
+metadata/_custom_type_script = "uid://bkosvnfdrt2ah"
 
 [connection signal="toggled" from="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtsButton" to="." method="_on_shirt_button_toggled"]
 [connection signal="toggled" from="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/PantsButton" to="." method="_on_pants_button_toggled"]

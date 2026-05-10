@@ -1,5 +1,18 @@
 extends Node2D
 
+# ----SAVE DATA----
+
+# These lists contain the identifiers of the unlocked items.
+# Unlocked colors will have the string names of the colors as that is how they're identified.
+# The unlocked sprites are identified by their row index in the master spritesheet.
+var unlocked_colors = []
+var unlocked_shirts = []
+var unlocked_pants = []
+var unlocked_shoes = []
+var unlocked_shirt_designs = []
+
+# -----------------
+
 # These are the dog breeds in the order they appear in the DogHeadSpritesheet.png/DogBodySpritesheet.png
 var dogTypes = ["corgi", "lab", "pom"]
 # If we want to grab the head texture from an AtlasTexture of DogHeadSpritesheet.png, we need to know how wide each sprite is. 
@@ -84,6 +97,10 @@ func instantiateColorButtons():
 		colorTemplateButton.get_parent().add_child(button)
 		button.name = color
 		button.pressed.connect(changeColor.bind(color))
+		
+#		If this color has not been unlocked, then we need to put a little lock over it :)
+		if color in unlocked_colors:
+			button.get_node("LockButton").visible = false
 		
 #	Hide the template button now that we have finished adding buttons. 
 	colorTemplateButton.visible = false
