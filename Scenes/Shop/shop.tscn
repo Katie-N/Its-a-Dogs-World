@@ -48,3 +48,4 @@ shape = SubResource("RectangleShape2D_dqdqq")
 [node name="DogCharacter" parent="." unique_id=1917843070 instance=ExtResource("2_dqdqq")]
 position = Vector2(219.00002, 250)
 scale = Vector2(0.44961163, 0.44961163)
+static_size = false

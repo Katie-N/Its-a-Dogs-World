@@ -10,6 +10,10 @@ var unlocked_shirts = []
 var unlocked_pants = []
 var unlocked_shoes = []
 var unlocked_shirt_designs = []
+var cost = {
+	"color": 0,
+	"clothes": 0
+}
 
 # -----------------
 
@@ -98,9 +102,12 @@ func instantiateColorButtons():
 		button.name = color
 		button.pressed.connect(changeColor.bind(color))
 		
+		var lockButton = button.get_node("LockButton")
+		lockButton.pressed.connect(openItemUnlockMenu.bind(button, button.name, unlocked_colors, "color", "this color"))
+		
 #		If this color has not been unlocked, then we need to put a little lock over it :)
 		if color in unlocked_colors:
-			button.get_node("LockButton").visible = false
+			lockButton.visible = false
 		
 #	Hide the template button now that we have finished adding buttons. 
 	colorTemplateButton.visible = false
@@ -261,3 +268,25 @@ func _on_shoes_button_toggled(pressed: bool) -> void:
 	# To hide the colorRect when the button is unpressed, make the colorRect visibility equal the emmitted toggle value (true when toggled on, false when toggled off)
 	# To prevent the colorRect from catching mouse clicks, set Mouse -> Filter = Ignore
 	# To make the ColorRect cover the TextureButton, set Layout -> Anchors Preset = Full Rect
+
+# When a locked item is clicked on, it will open the Buy Item Menu Container scene and wait for the user to either cancel or buy the item.
+func openItemUnlockMenu(lockedItem, itemName, unlockedArray, costKey, message):
+	$"CanvasLayer/Buy Item Menu Container".itemName = itemName
+	$"CanvasLayer/Buy Item Menu Container".cost = cost[costKey]
+	$"CanvasLayer/Buy Item Menu Container".visible = true
+	
+	
+func unlockItem(lockedItem, itemName, unlockedArray, costKey):
+	if itemName in unlockedArray:
+		print(itemName + " already unlocked... Something has gone wrong")
+		return
+	#if wallet < cost[costKey]:
+		#print("Not enough money :(")
+		#return
+	#wallet -= cost[costKey]
+	unlockedArray.append(itemName)
+		
+	print("Unlock " + lockedItem.name)
+#	Save after unlocking a new item
+	#SaverLoader.save_game()
+	

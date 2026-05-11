@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ms3ljw5y60kr" path="res://Art/Items/ClothingSpritesheet.png" id="7_5bqxl"]
 [ext_resource type="Script" uid="uid://bkosvnfdrt2ah" path="res://Src/saver_loader.gd" id="9_kgg0x"]
 [ext_resource type="Texture2D" uid="uid://cpunbttpl0sy2" path="res://Art/Items/lock.png" id="9_qw47h"]
+[ext_resource type="PackedScene" uid="uid://noair8speckf" path="res://Scenes/buy_item_menu_container.tscn" id="10_62c7g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a8vxu"]
 atlas = ExtResource("7_5bqxl")
@@ -205,6 +206,9 @@ grow_vertical = 2
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("9_qw47h")
 stretch_mode = 5
+
+[node name="Buy Item Menu Container" parent="CanvasLayer" unique_id=325690460 instance=ExtResource("10_62c7g")]
+visible = false
 
 [node name="SaverLoader" type="Node" parent="." unique_id=1260225901 node_paths=PackedStringArray("store_inventory")]
 script = ExtResource("9_kgg0x")
