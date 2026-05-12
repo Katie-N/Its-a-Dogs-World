@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://drn4bq81tbfap"]
 
-[ext_resource type="PackedScene" uid="uid://chb2ksgqf6a6r" path="res://Scenes/dogCharacter.tscn" id="1_bae7o"]
+[ext_resource type="PackedScene" uid="uid://chb2ksgqf6a6r" path="res://Scenes/SharedComponents/dogCharacter.tscn" id="1_bae7o"]
 [ext_resource type="Script" uid="uid://bwsit1rqq73il" path="res://Scenes/Shop/try_on.gd" id="1_giymh"]
 [ext_resource type="Texture2D" uid="uid://cxbt3x505jy1d" path="res://Art/Characters/corgiHead.png" id="3_3kunc"]
 [ext_resource type="ButtonGroup" uid="uid://xlr7r5o303dn" path="res://resources/articleOfClothingButtonGroup.tres" id="4_a8vxu"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ms3ljw5y60kr" path="res://Art/Items/ClothingSpritesheet.png" id="7_5bqxl"]
 [ext_resource type="Script" uid="uid://bkosvnfdrt2ah" path="res://Src/saver_loader.gd" id="9_kgg0x"]
 [ext_resource type="Texture2D" uid="uid://cpunbttpl0sy2" path="res://Art/Items/lock.png" id="9_qw47h"]
-[ext_resource type="PackedScene" uid="uid://noair8speckf" path="res://Scenes/buy_item_menu_container.tscn" id="10_62c7g"]
+[ext_resource type="PackedScene" uid="uid://noair8speckf" path="res://Scenes/SharedComponents/buy_item_menu_container.tscn" id="10_62c7g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a8vxu"]
 atlas = ExtResource("7_5bqxl")
@@ -218,3 +218,4 @@ metadata/_custom_type_script = "uid://bkosvnfdrt2ah"
 [connection signal="toggled" from="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtsButton" to="." method="_on_shirt_button_toggled"]
 [connection signal="toggled" from="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/PantsButton" to="." method="_on_pants_button_toggled"]
 [connection signal="toggled" from="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShoesButton" to="." method="_on_shoes_button_toggled"]
+[connection signal="buy_successful" from="CanvasLayer/Buy Item Menu Container" to="." method="_on_buy_item_menu_container_buy_successful"]

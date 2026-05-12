@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cxlh64sxlxgxg"]
+
+[ext_resource type="Script" uid="uid://dy1nakx6cubuf" path="res://game_data_manager.gd" id="1_adh3f"]
+[ext_resource type="PackedScene" uid="uid://bxdfqbs210iub" path="res://Scenes/SharedComponents/shop_inventory.tscn" id="2_bspsb"]
+[ext_resource type="PackedScene" uid="uid://cylxc15rqhn0b" path="res://Scenes/SharedComponents/wallet.tscn" id="3_kan6q"]
+
+[node name="GameDataManager" type="Node2D" unique_id=1158514141 node_paths=PackedStringArray("wallet", "shopInventory")]
+script = ExtResource("1_adh3f")
+wallet = NodePath("Wallet")
+shopInventory = NodePath("ShopInventory")
+
+[node name="Wallet" parent="." unique_id=748912966 instance=ExtResource("3_kan6q")]
+
+[node name="ShopInventory" parent="." unique_id=305332515 instance=ExtResource("2_bspsb")]

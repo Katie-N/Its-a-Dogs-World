@@ -2,18 +2,18 @@ extends Node2D
 
 # ----SAVE DATA----
 
-# These lists contain the identifiers of the unlocked items.
-# Unlocked colors will have the string names of the colors as that is how they're identified.
-# The unlocked sprites are identified by their row index in the master spritesheet.
-var unlocked_colors = []
-var unlocked_shirts = []
-var unlocked_pants = []
-var unlocked_shoes = []
-var unlocked_shirt_designs = []
-var cost = {
-	"color": 0,
-	"clothes": 0
-}
+## These lists contain the identifiers of the unlocked items.
+## Unlocked colors will have the string names of the colors as that is how they're identified.
+## The unlocked sprites are identified by their row index in the master spritesheet.
+#var unlocked_colors = []
+#var unlocked_shirts = []
+#var unlocked_pants = []
+#var unlocked_shoes = []
+#var unlocked_shirt_designs = []
+#var cost = {
+	#"color": 0,
+	#"clothes": 0
+#}
 
 # -----------------
 
@@ -42,6 +42,7 @@ var clothingHeight = 75
 @onready var clothingItemTemplateButton = $"CanvasLayer/CustomizationOptions/Clothing Selection/ClothingItemButton"
 
 func _ready():
+	print(GameDataManager.shopInventory.unlocked_colors)
 	instantiateDogModelButtons()
 	for clothingType in clothingTypes:
 		instantiateClothingButtons(clothingType)
@@ -93,20 +94,33 @@ func toggleBackground(pressed: bool, dogModelButton):
 # COLOR SELECTION GRID CODE
 
 func instantiateColorButtons():
+#	Reset the Color Selection Container
+#	This code was a workaround to get unlocked colors updated (so they wouldn't have a lock after being bought). 
+#	I couldn't figure out how to grab just the color that has a lock on it so I tried just reloading the entire color selection div...
+#	It works but at what cost...
+# 	I figured out how to isolate the locked item but I'm leaving this reset code here
+	var colorSelectionContainer = colorTemplateButton.get_parent()
+	for child in colorSelectionContainer.get_children():
+		if child.name == colorTemplateButton.name:
+			continue
+		colorSelectionContainer.remove_child(child)
+		child.queue_free()
+	colorTemplateButton.visible = true
+	
 	for color in availableColors:
 		var button = colorTemplateButton.duplicate()
 		var stylebox = button.get_theme_stylebox("normal").duplicate()
 		stylebox.bg_color = Color("#" + color)
 		button.add_theme_stylebox_override("normal", stylebox)
-		colorTemplateButton.get_parent().add_child(button)
+		colorSelectionContainer.add_child(button)
 		button.name = color
 		button.pressed.connect(changeColor.bind(color))
 		
 		var lockButton = button.get_node("LockButton")
-		lockButton.pressed.connect(openItemUnlockMenu.bind(button, button.name, unlocked_colors, "color", "this color"))
+		lockButton.pressed.connect(openItemUnlockMenu.bind(button.name, GameDataManager.shopInventory.unlocked_colors, "color", "this color"))
 		
 #		If this color has not been unlocked, then we need to put a little lock over it :)
-		if color in unlocked_colors:
+		if color in GameDataManager.shopInventory.unlocked_colors:
 			lockButton.visible = false
 		
 #	Hide the template button now that we have finished adding buttons. 
@@ -269,24 +283,23 @@ func _on_shoes_button_toggled(pressed: bool) -> void:
 	# To prevent the colorRect from catching mouse clicks, set Mouse -> Filter = Ignore
 	# To make the ColorRect cover the TextureButton, set Layout -> Anchors Preset = Full Rect
 
-# When a locked item is clicked on, it will open the Buy Item Menu Container scene and wait for the user to either cancel or buy the item.
-func openItemUnlockMenu(lockedItem, itemName, unlockedArray, costKey, message):
-	$"CanvasLayer/Buy Item Menu Container".itemName = itemName
-	$"CanvasLayer/Buy Item Menu Container".cost = cost[costKey]
-	$"CanvasLayer/Buy Item Menu Container".visible = true
+func openItemUnlockMenu(itemName, unlockedArray, costKey, message):
+	print(itemName)
+	$"CanvasLayer/Buy Item Menu Container".setItemInfo(itemName, unlockedArray, costKey, message)
+	$"CanvasLayer/Buy Item Menu Container".openMenu()
+
+func _on_buy_item_menu_container_buy_successful(itemName) -> void:
+#	recursive = true because we want to search grandchildren+ nodes
+#	owned = false because the node we are searching for was created by code and is therefore unowned by default. This is not the default behavior of find_child and was causing me errors before I set it to true. 
+	find_child(itemName, true, false).get_node("LockButton").visible = false
 	
+#	TODO: In the future, when clothing is locked too (not just colors), this function should probably be revisited.
+#	The color buttons are named exactly what itemName is (their hex code). 
+# 	But the clothing buttons are named {ClothingType}{index} (i.e. Shirts0 for the shirt in row 0 of the master spritesheet)
+#	I think 0 would be itemName in this case. We can't just search for 0, we have to know that it has the shirts clothing type. 
+#	And we can't get rid of clothing type because it is used to identify button_groups. 
+#	Not to mention how easy potential naming conflicts would get if the itemName was simply a number. 
+#	This will need to be thought about more in the future when its time to add in locked clothing.
 	
-func unlockItem(lockedItem, itemName, unlockedArray, costKey):
-	if itemName in unlockedArray:
-		print(itemName + " already unlocked... Something has gone wrong")
-		return
-	#if wallet < cost[costKey]:
-		#print("Not enough money :(")
-		#return
-	#wallet -= cost[costKey]
-	unlockedArray.append(itemName)
-		
-	print("Unlock " + lockedItem.name)
-#	Save after unlocking a new item
-	#SaverLoader.save_game()
-	
+#	My old workaround was to reinstantiate ALL of the selection buttons whenever something got bought.
+#	This is because the instantiation function handles checking whether an item is unlocked and then giving it a lock accordingly.

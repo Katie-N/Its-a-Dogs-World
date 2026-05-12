@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cylxc15rqhn0b"]
+
+[ext_resource type="Script" uid="uid://3dsj1yf07601" path="res://Scenes/SharedComponents/wallet.gd" id="1_cms6v"]
+
+[node name="Wallet" type="Node2D" unique_id=748912966]
+script = ExtResource("1_cms6v")
