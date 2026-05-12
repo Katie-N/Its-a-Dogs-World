@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://noair8speckf"]
 
-[ext_resource type="Script" uid="uid://b1xu8tq8qptg0" path="res://Scenes/SharedComponents/buy_item_menu_container.gd" id="1_gr1kq"]
+[ext_resource type="Script" uid="uid://b1xu8tq8qptg0" path="res://Src/sharedComponents/buy_item_menu_container.gd" id="1_gr1kq"]
 
 [sub_resource type="Theme" id="Theme_460hh"]
 

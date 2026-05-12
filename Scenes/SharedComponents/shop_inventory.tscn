@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bxdfqbs210iub"]
 
-[ext_resource type="Script" uid="uid://ceo7460407has" path="res://shop_inventory.gd" id="1_762mo"]
+[ext_resource type="Script" uid="uid://ceo7460407has" path="res://Src/sharedComponents/shop_inventory.gd" id="1_762mo"]
 
 [node name="ShopInventory" type="Node2D" unique_id=305332515]
 script = ExtResource("1_762mo")
