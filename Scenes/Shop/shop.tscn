@@ -2,6 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://bbni7w7yrxpvj" path="res://Art/Backgrounds/Background Mockup.png" id="1_78vcx"]
 [ext_resource type="PackedScene" uid="uid://chb2ksgqf6a6r" path="res://Scenes/SharedComponents/dogCharacter.tscn" id="2_dqdqq"]
+[ext_resource type="Texture2D" uid="uid://crn1ecfsl6i6s" path="res://Art/Backgrounds/Shop/wall.png" id="2_kcc5r"]
+[ext_resource type="Texture2D" uid="uid://cbhditwryrebs" path="res://Art/Backgrounds/Shop/floor.png" id="3_xybqi"]
+[ext_resource type="Texture2D" uid="uid://b8vhw8tjwjltg" path="res://Art/Backgrounds/Shop/door.png" id="4_cjwgl"]
+[ext_resource type="Texture2D" uid="uid://djlfmcxvbgtle" path="res://Art/Backgrounds/Shop/window.png" id="5_fsgtm"]
+[ext_resource type="Texture2D" uid="uid://bdce1v7siwym0" path="res://Art/Backgrounds/Shop/counter.png" id="7_oha7t"]
+[ext_resource type="Texture2D" uid="uid://bpqeg2bejtvl3" path="res://Art/Backgrounds/Shop/tip jar.png" id="8_ps16d"]
+[ext_resource type="Texture2D" uid="uid://75m402oegmig" path="res://Art/Backgrounds/Shop/cash register.png" id="9_m2v70"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8dak6"]
 size = Vector2(20, 616)
@@ -9,16 +16,13 @@ size = Vector2(20, 616)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8bjl"]
 size = Vector2(827, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcc5r"]
+size = Vector2(801.85535, 295.99908)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqdqq"]
-size = Vector2(635, 299.57428)
+size = Vector2(801.85535, 201.787)
 
 [node name="Shop" type="Node2D" unique_id=11903330]
-
-[node name="BackgroundMockup" type="Sprite2D" parent="." unique_id=1847400979]
-texture_filter = 1
-position = Vector2(399.33334, 299)
-scale = Vector2(4.0133333, 4.0133333)
-texture = ExtResource("1_78vcx")
 
 [node name="Level Border" type="StaticBody2D" parent="." unique_id=1994149378]
 
@@ -38,14 +42,71 @@ shape = SubResource("RectangleShape2D_w8bjl")
 position = Vector2(403.5, 610)
 shape = SubResource("RectangleShape2D_w8bjl")
 
-[node name="Walls" type="StaticBody2D" parent="." unique_id=932934400]
+[node name="BackgroundMockup" type="Sprite2D" parent="." unique_id=1847400979]
+texture_filter = 1
+position = Vector2(399.33334, 299)
+scale = Vector2(4.0133333, 4.0133333)
+texture = ExtResource("1_78vcx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls" unique_id=433553806]
-position = Vector2(315.4293, 129.41754)
-rotation = -0.033934284
-shape = SubResource("RectangleShape2D_dqdqq")
+[node name="Background" type="Node2D" parent="." unique_id=952078312]
+position = Vector2(-974, -653)
+scale = Vector2(4.0055456, 4.0055456)
+
+[node name="Wall" type="Sprite2D" parent="Background" unique_id=1303746513]
+position = Vector2(343, 238.00002)
+texture = ExtResource("2_kcc5r")
+
+[node name="Walls" type="StaticBody2D" parent="Background/Wall" unique_id=932934400]
+position = Vector2(-99.83711, -74.97604)
+scale = Vector2(0.24965389, 0.24965389)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Wall/Walls" unique_id=433553806]
+position = Vector2(397.99503, 148.0075)
+rotation = -0.002494458
+shape = SubResource("RectangleShape2D_kcc5r")
+
+[node name="Floor" type="Sprite2D" parent="Background" unique_id=631873052]
+position = Vector2(342.77478, 273.371)
+texture = ExtResource("3_xybqi")
+
+[node name="Door" type="Sprite2D" parent="Background" unique_id=515715816]
+position = Vector2(304.07837, 213.45403)
+texture = ExtResource("4_cjwgl")
+
+[node name="Window" type="Sprite2D" parent="Background" unique_id=1966620950]
+position = Vector2(367.9898, 203.21826)
+texture = ExtResource("5_fsgtm")
+
+[node name="Window2" type="Sprite2D" parent="Background" unique_id=676546841]
+position = Vector2(239.91736, 203.21825)
+texture = ExtResource("5_fsgtm")
 
 [node name="DogCharacter" parent="." unique_id=1917843070 instance=ExtResource("2_dqdqq")]
 position = Vector2(219.00002, 250)
 scale = Vector2(0.44961163, 0.44961163)
 static_size = false
+
+[node name="Foreground" type="Node2D" parent="." unique_id=1440345645]
+position = Vector2(-974, -653)
+scale = Vector2(4.0055456, 4.0055456)
+
+[node name="Counter" type="Sprite2D" parent="Foreground" unique_id=1568996705]
+position = Vector2(343.0244, 289.34894)
+texture = ExtResource("7_oha7t")
+
+[node name="Walls" type="StaticBody2D" parent="Foreground/Counter" unique_id=1822136265]
+position = Vector2(-99.83711, -74.97604)
+scale = Vector2(0.24965389, 0.24965389)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Counter/Walls" unique_id=2080920368]
+position = Vector2(397.02423, 404.2131)
+rotation = -0.002494458
+shape = SubResource("RectangleShape2D_dqdqq")
+
+[node name="TipJar" type="Sprite2D" parent="Foreground" unique_id=1366738394]
+position = Vector2(277.36545, 272.37238)
+texture = ExtResource("8_ps16d")
+
+[node name="CashRegister" type="Sprite2D" parent="Foreground" unique_id=332957536]
+position = Vector2(390.45868, 270.1255)
+texture = ExtResource("9_m2v70")
