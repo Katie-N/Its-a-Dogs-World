@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bf2i7qsh6ai88"]
 
 [ext_resource type="Texture2D" uid="uid://bbni7w7yrxpvj" path="res://Art/Backgrounds/Background Mockup.png" id="1_78vcx"]
-[ext_resource type="PackedScene" uid="uid://chb2ksgqf6a6r" path="res://Scenes/dogCharacter.tscn" id="2_dqdqq"]
+[ext_resource type="PackedScene" uid="uid://chb2ksgqf6a6r" path="res://Scenes/SharedComponents/dogCharacter.tscn" id="2_dqdqq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8dak6"]
 size = Vector2(20, 616)
@@ -48,3 +48,4 @@ shape = SubResource("RectangleShape2D_dqdqq")
 [node name="DogCharacter" parent="." unique_id=1917843070 instance=ExtResource("2_dqdqq")]
 position = Vector2(219.00002, 250)
 scale = Vector2(0.44961163, 0.44961163)
+static_size = false

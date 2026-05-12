@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 @export var max_speed = 400 # How fast the player will move (pixels/sec).
+@export var static_size = true # Whether the dog will get smaller as it moves up and bigger as it moves down.
+
 var screen_size # Size of the game window.
 var last_direction := Vector2(1,0)
 
@@ -16,12 +18,13 @@ func _physics_process(delta):
 		last_direction = direction
 
 func _process(delta):
-	#	Make the dog get bigger as it walks down and smaller as it walks up
-	var min_scale = 0.5
-	var max_scale = 1.0
-	var far_distance = 100.0
-	var near_distance = 300.0
+	if not static_size:
+		#	Make the dog get bigger as it walks down and smaller as it walks up
+		var min_scale = 0.5
+		var max_scale = 1.0
+		var far_distance = 100.0
+		var near_distance = 300.0
 
-	var distance = (position.y - far_distance) / near_distance
-	scale.x = lerp(min_scale, max_scale, distance)
-	scale.y = lerp(min_scale, max_scale, distance)
+		var distance = (position.y - far_distance) / near_distance
+		scale.x = lerp(min_scale, max_scale, distance)
+		scale.y = lerp(min_scale, max_scale, distance)

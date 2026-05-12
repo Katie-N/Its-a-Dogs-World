@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://drn4bq81tbfap"]
 
-[ext_resource type="PackedScene" uid="uid://chb2ksgqf6a6r" path="res://Scenes/dogCharacter.tscn" id="1_bae7o"]
+[ext_resource type="PackedScene" uid="uid://chb2ksgqf6a6r" path="res://Scenes/SharedComponents/dogCharacter.tscn" id="1_bae7o"]
 [ext_resource type="Script" uid="uid://bwsit1rqq73il" path="res://Scenes/Shop/try_on.gd" id="1_giymh"]
 [ext_resource type="Texture2D" uid="uid://cxbt3x505jy1d" path="res://Art/Characters/corgiHead.png" id="3_3kunc"]
 [ext_resource type="ButtonGroup" uid="uid://xlr7r5o303dn" path="res://resources/articleOfClothingButtonGroup.tres" id="4_a8vxu"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bubu7io4x65xa" path="res://Art/Items/pantsButton.png" id="5_5bqxl"]
 [ext_resource type="Texture2D" uid="uid://bwx8bfnj8sx5k" path="res://Art/Items/shoeButton.png" id="6_a8vxu"]
 [ext_resource type="Texture2D" uid="uid://ms3ljw5y60kr" path="res://Art/Items/ClothingSpritesheet.png" id="7_5bqxl"]
+[ext_resource type="Texture2D" uid="uid://cpunbttpl0sy2" path="res://Art/Items/lock.png" id="9_qw47h"]
+[ext_resource type="PackedScene" uid="uid://noair8speckf" path="res://Scenes/SharedComponents/buy_item_menu_container.tscn" id="10_62c7g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a8vxu"]
 atlas = ExtResource("7_5bqxl")
@@ -193,6 +195,21 @@ size_flags_vertical = 3
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_mjnc6")
 
+[node name="LockButton" type="TextureButton" parent="CanvasLayer/CustomizationOptions/Color Selection/ColorButton" unique_id=1045986768]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("9_qw47h")
+stretch_mode = 5
+
+[node name="Buy Item Menu Container" parent="CanvasLayer" unique_id=325690460 instance=ExtResource("10_62c7g")]
+visible = false
+
 [connection signal="toggled" from="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtsButton" to="." method="_on_shirt_button_toggled"]
 [connection signal="toggled" from="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/PantsButton" to="." method="_on_pants_button_toggled"]
 [connection signal="toggled" from="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShoesButton" to="." method="_on_shoes_button_toggled"]
+[connection signal="buy_successful" from="CanvasLayer/Buy Item Menu Container" to="." method="_on_buy_item_menu_container_buy_successful"]

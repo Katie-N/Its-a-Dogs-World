@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://noair8speckf"]
+
+[ext_resource type="Script" uid="uid://b1xu8tq8qptg0" path="res://Scenes/SharedComponents/buy_item_menu_container.gd" id="1_gr1kq"]
+
+[sub_resource type="Theme" id="Theme_460hh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qw47h"]
+
+[sub_resource type="Theme" id="Theme_qw47h"]
+
+[sub_resource type="Theme" id="Theme_62c7g"]
+
+[node name="Buy Item Menu Container" type="Control" unique_id=325690460]
+z_index = 5
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gr1kq")
+
+[node name="Exit Menu" type="Button" parent="." unique_id=976097403]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_460hh")
+theme_type_variation = &"FlatButton"
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qw47h")
+
+[node name="Buy Item Menu" type="Control" parent="." unique_id=1519144802]
+anchors_preset = 0
+offset_left = 145.0
+offset_top = 131.0
+offset_right = 661.0
+offset_bottom = 413.0
+
+[node name="ColorRect" type="ColorRect" parent="Buy Item Menu" unique_id=146669353]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.30686396, 0.17891634, 0.021225445, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Buy Item Menu" unique_id=1695864485]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 56.0
+offset_top = -120.0
+offset_right = -56.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Buy" type="Button" parent="Buy Item Menu/HBoxContainer" unique_id=492547211]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_qw47h")
+theme_override_font_sizes/font_size = 20
+text = "Buy"
+
+[node name="Cancel" type="Button" parent="Buy Item Menu/HBoxContainer" unique_id=1938794609]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_qw47h")
+theme_override_font_sizes/font_size = 20
+text = "Cancel"
+
+[node name="Label" type="Label" parent="Buy Item Menu" unique_id=1209113254]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 50.0
+offset_top = 49.0
+offset_right = -50.0
+offset_bottom = 124.0
+grow_horizontal = 2
+theme = SubResource("Theme_62c7g")
+theme_override_font_sizes/font_size = 26
+text = "Do you want to buy this item for x coins?"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="pressed" from="Exit Menu" to="." method="_on_exit_menu_pressed"]
+[connection signal="pressed" from="Buy Item Menu/HBoxContainer/Buy" to="." method="_on_buy_pressed"]
+[connection signal="pressed" from="Buy Item Menu/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

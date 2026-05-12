@@ -14,6 +14,11 @@ config/name="Its a Dogs World"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameDataManager="*uid://cxlh64sxlxgxg"
+SaverLoader="*uid://dteu7wl5pvfs2"
+
 [display]
 
 window/size/viewport_width=800

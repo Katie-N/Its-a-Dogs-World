@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://chb2ksgqf6a6r"]
 
-[ext_resource type="Script" uid="uid://crgi1dhxgyo53" path="res://Scenes/dog_character.gd" id="1_w7o8x"]
+[ext_resource type="Script" uid="uid://crgi1dhxgyo53" path="res://Scenes/SharedComponents/dog_character.gd" id="1_w7o8x"]
 [ext_resource type="Texture2D" uid="uid://coeuruojdj8km" path="res://Art/Characters/DogBodySpritesheet.png" id="2_w7o8x"]
 [ext_resource type="Texture2D" uid="uid://ms3ljw5y60kr" path="res://Art/Items/ClothingSpritesheet.png" id="3_00prv"]
 [ext_resource type="Texture2D" uid="uid://77ckvastgmxk" path="res://Art/Characters/DogHeadSpritesheet.png" id="4_up476"]
