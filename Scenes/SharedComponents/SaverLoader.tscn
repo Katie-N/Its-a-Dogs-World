@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dteu7wl5pvfs2"]
 
-[ext_resource type="Script" uid="uid://bkosvnfdrt2ah" path="res://Scenes/SharedComponents/saver_loader.gd" id="1_a052q"]
+[ext_resource type="Script" uid="uid://bkosvnfdrt2ah" path="res://Src/sharedComponents/saver_loader.gd" id="1_a052q"]
 
 [node name="SaverLoader" type="Node" unique_id=854407516]
 script = ExtResource("1_a052q")
