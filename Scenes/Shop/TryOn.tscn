@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://bubu7io4x65xa" path="res://Art/Items/pantsButton.png" id="5_5bqxl"]
 [ext_resource type="Texture2D" uid="uid://bwx8bfnj8sx5k" path="res://Art/Items/shoeButton.png" id="6_a8vxu"]
 [ext_resource type="Texture2D" uid="uid://ms3ljw5y60kr" path="res://Art/Items/ClothingSpritesheet.png" id="7_5bqxl"]
-[ext_resource type="Script" uid="uid://bkosvnfdrt2ah" path="res://Src/saver_loader.gd" id="9_kgg0x"]
 [ext_resource type="Texture2D" uid="uid://cpunbttpl0sy2" path="res://Art/Items/lock.png" id="9_qw47h"]
 [ext_resource type="PackedScene" uid="uid://noair8speckf" path="res://Scenes/SharedComponents/buy_item_menu_container.tscn" id="10_62c7g"]
 
@@ -209,11 +208,6 @@ stretch_mode = 5
 
 [node name="Buy Item Menu Container" parent="CanvasLayer" unique_id=325690460 instance=ExtResource("10_62c7g")]
 visible = false
-
-[node name="SaverLoader" type="Node" parent="." unique_id=1260225901 node_paths=PackedStringArray("store_inventory")]
-script = ExtResource("9_kgg0x")
-store_inventory = NodePath("..")
-metadata/_custom_type_script = "uid://bkosvnfdrt2ah"
 
 [connection signal="toggled" from="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/ShirtsButton" to="." method="_on_shirt_button_toggled"]
 [connection signal="toggled" from="CanvasLayer/CustomizationOptions/Article Of Clothing Selection/PantsButton" to="." method="_on_pants_button_toggled"]

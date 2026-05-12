@@ -1,8 +1,12 @@
-class_name SaverLoader
+#class_name SaverLoader
 extends Node
 
 #@onready var store_inventory = $".."
-@export var store_inventory : Node2D
+#@export var store_inventory : Node2D
+var store_inventory = GameDataManager.shopInventory
+
+func _ready() -> void:
+	load_game()
 
 func new_game():
 	var file = FileAccess.open("user://savegame.data", FileAccess.WRITE)
@@ -46,6 +50,7 @@ func save_game():
 		"unlocked_shirt_designs": store_inventory.unlocked_shirt_designs,
 	}
 	saved_data["store_items"] = store_items
+	print("Saved store items " + str(store_items))
 	var store_display = {
 		"0": {
 			"shirts": null,

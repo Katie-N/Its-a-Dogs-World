@@ -38,9 +38,9 @@ func unlockItem():
 	#GameDataManager.wallet.subtract_money(GameDataManager.shopInventory.cost[costKey])
 	GameDataManager.wallet.subtract_money(cost)
 	
-	unlockedArray.append(itemName)
-#	Could also call shop_inventory.addToList() but I think this works too as unlockedArray should be a reference to GameDataManager.shopInventory.someArray rather than a copy of it. 
-		
+#	By letting the shop inventory add the item to the array, we are letting it handle calling the saving function
+	GameDataManager.shopInventory.addToList(itemName, unlockedArray)
+	
 #	After successfully buying the item, we will emit a signal so any updates from the other scenes can be made
 #	For example, after buying a color, the TryOn scene will need to know about it so it can remove the lock button over that color.  
 	buy_successful.emit(itemName)

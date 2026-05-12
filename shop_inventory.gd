@@ -22,4 +22,5 @@ var cost = {
 
 func addToList(itemName, unlockedArray):
 	unlockedArray.append(itemName)
-	print(itemName + " has been added to " + unlockedArray)
+	print(itemName + " has been added to " + str(unlockedArray))
+	SaverLoader.save_game()
