@@ -5,11 +5,19 @@ extends Node
 #@export var store_inventory : Node2D
 var store_inventory = GameDataManager.shopInventory
 
-func _ready() -> void:
-	load_game()
+var saveNum : int
 
-func new_game():
-	var file = FileAccess.open("user://savegame.data", FileAccess.WRITE)
+#func _ready() -> void:
+	#load_game(1)
+	
+func savePathFormat(selectedSave):
+	return "user://savegame" + str(selectedSave) + ".data"
+
+func delete_save(selectedSave):
+	DirAccess.remove_absolute(savePathFormat(selectedSave))
+
+func new_game():	
+	var file = FileAccess.open(savePathFormat(saveNum), FileAccess.WRITE)
 	var saved_data = {}
 	
 	var store_items = {
@@ -39,7 +47,7 @@ func new_game():
 	file.close()
 
 func save_game():
-	var file = FileAccess.open("user://savegame.data", FileAccess.WRITE)
+	var file = FileAccess.open(savePathFormat(saveNum), FileAccess.WRITE)
 	var saved_data = {}
 	
 	var store_items = {
@@ -69,8 +77,15 @@ func save_game():
 	file.store_var(saved_data)
 	file.close()
 	
-func load_game():
-	var file = FileAccess.open("user://savegame.data", FileAccess.READ)
+func load_game(selectedSave):
+	saveNum = selectedSave
+	if save_exists(saveNum):
+		load_existing_save()
+	else:
+		new_game()
+			
+func load_existing_save():
+	var file = FileAccess.open(savePathFormat(saveNum), FileAccess.READ)
 	var saved_data = file.get_var()
 	
 #	TODO: load saved data to appropriate variables
@@ -81,3 +96,6 @@ func load_game():
 	store_inventory.unlocked_shirt_designs = saved_data["store_items"]["unlocked_shirt_designs"]
 	
 	file.close()
+
+func save_exists(selectedSave):
+	return FileAccess.file_exists(savePathFormat(selectedSave))

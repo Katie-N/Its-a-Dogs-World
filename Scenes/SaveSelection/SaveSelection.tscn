@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://15n12lkjdx4n"]
+
+[ext_resource type="Script" uid="uid://dctpnndbj7ita" path="res://Scenes/SaveSelection/save_selection.gd" id="1_1dyn8"]
+
+[node name="SaveSelection" type="Control" unique_id=1949561581]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1dyn8")
+
+[node name="Control" type="ColorRect" parent="." unique_id=751687761]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.6313726, 0.627451, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=900012686]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 175.0
+offset_right = 713.0
+offset_bottom = 507.0
+
+[node name="Save0" type="Button" parent="HBoxContainer" unique_id=26728686]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "New Save"
+
+[node name="Delete" type="Button" parent="HBoxContainer/Save0" unique_id=1958782168]
+visible = false
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Delete"
+
+[node name="Save1" type="Button" parent="HBoxContainer" unique_id=972654703]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "New Save"
+
+[node name="Delete" type="Button" parent="HBoxContainer/Save1" unique_id=304585028]
+visible = false
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Delete"
+
+[node name="Save2" type="Button" parent="HBoxContainer" unique_id=84918919]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "New Save"
+
+[node name="Delete" type="Button" parent="HBoxContainer/Save2" unique_id=661403296]
+visible = false
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Delete"
+
+[node name="Label" type="Label" parent="." unique_id=810695144]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 55.0
+offset_bottom = 105.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "Its a Dogs World"
+horizontal_alignment = 1
